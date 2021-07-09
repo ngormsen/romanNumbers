@@ -1,44 +1,52 @@
 public class RomanNumbers {
-
-
-
-    //roman numbers
     private final String[] romanNumbers = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    private final int[] arabicNumbers = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
-    public String parseRomanNumbersToArabicNumbersOrArabicNumbersToRomanNumbers(String inputNumber) {
-        try{
-            Integer.parseInt(inputNumber);
-            flag = true;
-        }catch(Exception e){
-            // exception
-            if (inputNumber.matches("[a-zA-Z]+")) { flag = false; }
-            else{ return "Wrong input!"; }
-        }
-
-
-
-
-        if(flag){ // arabic to roman
-            int n = Integer.parseInt(inputNumber);
-            StringBuilder result = new StringBuilder();
-            for(int i = 0; i < romanNumbers.length; i++){ while (n >= an[i]) { result.append(romanNumbers[i]);n -= an[i]; } }
-            return result.length() > 0 ? result.toString() : "Wrong input!";
-        }else{ // roman to arabic
-            String n = inputNumber;
-            int r = 0;
-            int i = 0;
-            while (n.length() > 0 && i < romanNumbers.length) { if(n.startsWith(romanNumbers[i])){ r += an[i]; n = n.substring(romanNumbers[i].length()); }else{ i++; } }
-            return String.valueOf(r);
-        }
+    public String parse(String inputNumber) {
+        if (isArabic(inputNumber)) return romanNumberOf(inputNumber);
+        else if (isRoman(inputNumber)) return arabicNumberOf(inputNumber);
+        else return "Wrong input!";
     }
 
-    // arabic numbers
-    private final int[] an = new ArabicNumbers().getArabicNumbers();
-    private boolean flag; //flag for different cases
+    private String romanNumberOf(String inputNumber) {
+        int arabicNumber = Integer.parseInt(inputNumber);
+
+        StringBuilder result = new StringBuilder();
+        for(int idx = 0; idx < romanNumbers.length; idx++){
+            while (arabicNumber >= arabicNumbers[idx]){
+                result.append(romanNumbers[idx]);
+                arabicNumber -= arabicNumbers[idx];
+            }
+        }
+        return result.length() > 0 ? result.toString() : "Wrong input!";
+    }
+
+
+    private String arabicNumberOf(String inputNumber) {
+        int result = 0;
+        int idx = 0;
+        while (inputNumber.length() > 0 && idx < romanNumbers.length) {
+            if(inputNumber.startsWith(romanNumbers[idx])){
+                result += arabicNumbers[idx];
+                inputNumber = inputNumber.substring(romanNumbers[idx].length());
+            }else{
+                idx++;
+            }
+        }
+        return String.valueOf(result);
+    }
+
+    private boolean isArabic(String number) {
+        return number.matches("[0-9]+");
+    }
+
+    private boolean isRoman(String number) {
+        return number.matches("[a-zA-Z]+");
+    }
 
     public static void main(String[] args) {
         RomanNumbers romanNumbers = new RomanNumbers();
-        System.out.println(romanNumbers.parseRomanNumbersToArabicNumbersOrArabicNumbersToRomanNumbers(args[0]));
+        System.out.println(romanNumbers.parse(args[0]));
     }
 
 }

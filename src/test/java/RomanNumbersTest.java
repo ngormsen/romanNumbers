@@ -27,7 +27,7 @@ class RomanNumbersTest {
             "X1, Wrong input!"
     })
     void should_return_correct_arabic_number_when_receiving_roman_number(String input, String expected ){
-        String output = romanNumbers.parseRomanNumbersToArabicNumbersOrArabicNumbersToRomanNumbers(input);
+        String output = romanNumbers.parse(input);
         assertEquals(expected, output);
     }
 
@@ -43,7 +43,7 @@ class RomanNumbersTest {
             "1X, Wrong input!"
     })
     void should_return_correct_roman_number_when_receiving_arabic_number(String input, String expected ){
-        String output = romanNumbers.parseRomanNumbersToArabicNumbersOrArabicNumbersToRomanNumbers(input);
+        String output = romanNumbers.parse(input);
         assertEquals(expected, output);
     }
 
