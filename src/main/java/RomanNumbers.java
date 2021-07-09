@@ -18,26 +18,25 @@ public class RomanNumbers {
                 arabicNumber -= arabicNumbers[idx];
             }
         }
-        return result.length() > 0 ? result.toString() : "Wrong input!";
+        return result.toString();
     }
 
-
     private String arabicNumberOf(String inputNumber) {
-        int result = 0;
+        int resultingArabicNumber = 0;
         int idx = 0;
         while (inputNumber.length() > 0 && idx < romanNumbers.length) {
             if(inputNumber.startsWith(romanNumbers[idx])){
-                result += arabicNumbers[idx];
+                resultingArabicNumber += arabicNumbers[idx];
                 inputNumber = inputNumber.substring(romanNumbers[idx].length());
             }else{
                 idx++;
             }
         }
-        return String.valueOf(result);
+        return String.valueOf(resultingArabicNumber);
     }
 
     private boolean isArabic(String number) {
-        return number.matches("[0-9]+");
+        return number.matches("[0-9]+") && !number.matches("0+");
     }
 
     private boolean isRoman(String number) {
@@ -48,5 +47,4 @@ public class RomanNumbers {
         RomanNumbers romanNumbers = new RomanNumbers();
         System.out.println(romanNumbers.parse(args[0]));
     }
-
 }
