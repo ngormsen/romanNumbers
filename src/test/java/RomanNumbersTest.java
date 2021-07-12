@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RomanNumbersTest {
 
-    private RomanNumbers romanNumbers;
+    private GoodRomanNumbers romanNumbers;
 
     @BeforeAll
     void setUp(){
-        romanNumbers = new RomanNumbers();
+        romanNumbers = new GoodRomanNumbers();
     }
 
     @ParameterizedTest

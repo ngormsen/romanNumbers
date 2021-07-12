@@ -65,7 +65,7 @@ public class GoodRomanNumbers {
     }
 
     private boolean isRoman(String number) {
-        return number.matches("[a-zA-Z]+");
+        return number.matches("[A-Z]+");
     }
 
     public static void main(String[] args) {
